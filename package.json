@@ -1,0 +1,73 @@
+{
+  "name": "projecto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "connect-session-sequelize": "^7.1.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.10.0",
+    "init": "^0.1.2",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "nodemon": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperMartas/Projecto.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SuperMartas/Projecto/issues"
+  },
+  "homepage": "https://github.com/SuperMartas/Projecto#readme",
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es2021": true,
+      "jest": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "indent": [
+        "error",
+        "tab"
+      ],
+      "camelcase": "error"
+    }
+  },
+  "scripts": {
+    "start": "node --es-module-specifier-resolution=node -r dotenv/config index.js",
+    "dev": "nodemon --es-module-specifier-resolution=node -r dotenv/config index.js",
+    "prepare": "husky install",
+    "test": "node --experimental-vm-modules --es-module-specifier-resolution=node -r dotenv/config node_modules/jest/bin/jest.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  }
+}

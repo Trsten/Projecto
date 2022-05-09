@@ -1,0 +1,88 @@
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Risk name</th>
+			<th>Category</th>
+			<th>Created at</th>
+			<th>Responded at</th>
+			<th>Identified at</th>
+			<th colspan="3">Number of results: <%= risks.length %> </th>
+		</tr>
+	</thead>
+	<tbody>
+	<% risks.forEach(risk=> {
+	const {  dataValues: {
+	  id,
+	  categoryId,
+	  projectId,
+	  riskManagerId,
+	  name,
+	  description,
+	  threat,
+	  starters,
+	  response,
+	  probability,
+	  impact,
+	  status,
+	  identifiedAt,
+	  statusUpdatedAt,
+	  respondedAt,
+	  createdAt,
+	  updatedAt,
+	  category,
+	}} = risk
+	const date = new Date(createdAt);
+	%>
+	<tr>
+		<td>
+			<%= id %>
+		</td>
+		<td>
+			<%= name %>
+		</td>
+		<td>
+			<%= category.dataValues.name %>
+		</td>
+		
+		<td>
+			<%= `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()}` %>
+		</td>
+		<td>
+
+		    <%
+		        if(respondedAt!=null){
+		    %>
+                <%=`${respondedAt.getDate()}/${respondedAt.getMonth() + 1}/${respondedAt.getFullYear()}` %>
+			<%
+			    } else {
+			%>
+			<%= "<Date not set>" %>
+            <% } %>
+		</td>
+		<td>
+
+		    <%
+		        if(identifiedAt!=null){
+		    %>
+                <%=`${identifiedAt.getDate()}/${identifiedAt.getMonth() + 1}/${identifiedAt.getFullYear()}` %>
+			<%
+			    } else {
+			%>
+			<%= "<Date not set>" %>
+            <% } %>
+		</td>
+		<td class="align-middle text-center"><a class="btn btn-sm btn-outline-secondary" href=<%="/risk/detail/" + id %>>Details</a></td>
+		<% if (user.role === "risk_manager" || user.role === "project_manager" || user.role === "admin") { %>
+		<td class="align-middle text-center"><a class="btn btn-sm btn-outline-secondary" href=<%="/risk/edit/" + id%>>Edit</a></td>
+		<td class="align-middle">
+			<%- include("../modal/modalOpenButton", { data: id, title: "Delete", disabled: status !== "active", modalId: "riskModal"}); -%>
+		</td>
+		<% } %>
+	</tr>
+<% }) %>
+	</tbody>
+</table>
+<%- include("../modal/deleteRiskModal"); -%>
+
+

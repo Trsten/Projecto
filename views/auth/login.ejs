@@ -1,0 +1,17 @@
+<%- include("../layout/header", { title: "Login", menu: false }); -%>
+<div class="container login-container">
+	<h1 class="login-heading">Projecto IS risk management</h1>
+	<form class="login-form" method="post">
+		<div class="mb-3">
+			<h2 class="login-form-heading">User Login</h2>
+		</div>
+		<div class="mb-3">
+			<%- include("../input.ejs", { type: "email", name: "email", title: "Email", required: true }) %>
+		</div>
+		<div class="mb-3">
+			<%- include("../input.ejs", { type: "password", name: "password", title: "Password", required: true }) %>
+		</div>
+		<button type="submit" class="btn btn-primary login-button">Login</button>
+	</form>
+</div>
+<%- include("../layout/footer"); -%>

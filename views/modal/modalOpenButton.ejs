@@ -1,0 +1,6 @@
+<button type="button" class="btn btn-sm btn-outline-secondary mx-auto d-block"  data-bs-toggle="modal"
+        data-bs-target="<%= (locals.modalId && modalId) ? `#${modalId}` : "#modal" %>"
+		data-bs-data="<%= (locals.data && data) ? data : "" %>"
+        <%= (locals.disabled ? "disabled readonly": "")%>>
+	<%= (locals.title && title) ? title : "Modal button" %>
+</button>

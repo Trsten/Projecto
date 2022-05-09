@@ -1,0 +1,35 @@
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const modal = document.getElementById("riskManagerModal");
+		fetch("/project/available-risk-managers")
+			.then(response => response.json())
+			.then(data => {
+				const select = document.getElementById("riskManagerId");
+				for (const manager of data) {
+					const option = document.createElement("option");
+					option.text = manager.name;
+					option.value = manager.id;
+					select.appendChild(option);
+				}
+			})
+			.catch(console.error);
+		modal.addEventListener("show.bs.modal", (event) => {
+			const button = event.relatedTarget;
+			const project = button.getAttribute("data-bs-data");
+			const idInput = modal.querySelector("#riskManagerModal-projectId");
+			idInput.value = project;
+			});
+	});
+</script>
+
+<%- include("./modalStart", { title: "Change risk manager?", action: "/project/change-manager", modalId: "riskManagerModal" }); -%>
+<p>
+	Please select new risk manager
+</p>
+<div class="form-floating">
+		<select name="riskManagerId" class="form-select" id="riskManagerId">
+			<option value="0">No risk manager</option>
+		</select>
+		<label for="riskManagerId">Risk manager</label>
+	</div>
+<%- include("./modalEnd"); -%>

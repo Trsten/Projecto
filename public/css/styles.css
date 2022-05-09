@@ -1,0 +1,242 @@
+:root
+{
+	--border-color: rgba(0, 0, 0, 0.25);
+	--menu-background-color: #EEE;
+}
+
+body
+{
+	display: flex;
+}
+
+p
+{
+	text-align: justify;
+}
+
+main
+{
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	min-height: 100vh;
+	padding: 1rem 2rem;
+}
+
+td, th
+{
+	vertical-align: middle;
+}
+
+h1
+{
+	margin-bottom: 1rem;
+}
+
+.heading
+{
+	display: flex;
+	align-items: baseline;
+}
+
+.heading h1
+{
+	flex: 1 0 auto;
+}
+
+.menu
+{
+	background: var(--menu-background-color);
+	border-right: 2px solid #666;
+	flex: 0 0 auto;
+	padding: 1rem 0;
+	width: 18rem;
+	text-align: center;
+	flex: 0 0 auto;
+}
+
+.menu-heading
+{
+	border-bottom: 1px solid var(--border-color);
+	padding-bottom: 1rem;
+	margin: 0 1rem 1rem;
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.menu-avatar
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--menu-background-color);
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px #333;
+	width: 6rem;
+	height: 6rem;
+	margin: 0 auto 1rem;
+	padding: 1rem;
+	background: #999;
+	font-size: 2rem;
+	font-weight: lighter;
+}
+
+.menu-links
+{
+	border-top: 1px solid var(--border-color);
+	border-bottom: 1px solid var(--border-color);
+}
+
+.menu-links a
+{
+	display: block;
+	border-radius: 0.25rem;
+	color: inherit;
+	padding: 0.5rem 1rem;
+	font-size: 1.25rem;
+	text-decoration: none;
+}
+
+.menu-links a:hover
+{
+	background: rgba(0, 0, 0, 0.15);
+}
+
+.login-container
+{
+	max-width: 35rem;
+	margin-top: 8vh;
+}
+
+.login-heading
+{
+	margin-bottom: 3rem;
+	text-align: center;
+}
+
+.login-form-heading
+{
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+.login-form
+{
+	background: #F9F9F9;
+	border: 1px solid #CED4DA;
+	border-radius: 0.5rem;
+	padding: 2rem;
+	margin: 0 6rem;
+}
+
+.login-button
+{
+	margin: auto;
+}
+
+/* styles for project views */
+
+form.project-search-form {
+	background: #F9F9F9;
+	border: 1px solid #CED4DA;
+	border-radius: 0.5rem;
+	padding: 2rem;
+}
+
+.project-list-header
+{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.rotate {
+	/* FF3.5+ */
+	-moz-transform: rotate(-90.0deg);
+	/* Opera 10.5 */
+	-o-transform: rotate(-90.0deg);
+	/* Saf3.1+, Chrome */
+	-webkit-transform: rotate(-90.0deg);
+	/* IE6,IE7 */
+	filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.083);
+	/* IE8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
+	/* Standard */
+	transform: rotate(-90.0deg);
+  }
+
+.btn-sqr {
+	border-radius: 0;
+}
+
+.btn-medium {
+	background-color: #ecea45; 
+	color:rgb(139, 133, 37); 
+	border-color: #ffffff; 
+}
+
+.btn-high {
+	background-color: #d4a866; 
+	color:rgb(99, 69, 25); 
+	border-color: #ffffff; 
+}
+
+.btn-critical {
+	background-color: #d47666; 
+	color:rgb(99, 48, 25); 
+	border-color: #ffffff; 
+}
+
+.btn-dangerous {
+	background-color: #df312b; 
+	color:rgb(240, 199, 196); 
+	border-color: #ffffff; 
+}
+
+.btn-low {
+	background-color: #7eb46f; 
+	color:rgb(29, 92, 9); 
+	border-color: #ffffff; 
+}
+
+.btn-low:hover, .btn-low:focus, .btn-low:active, .btn-low.active, .open .dropdown-toggle.btn-low,
+.btn-dangerous:hover, .btn-dangerous:focus, .btn-dangerous:active, .btn-dangerous.active, .open .dropdown-toggle.btn-dangerous,
+.btn-critical:hover, .btn-critical:focus, .btn-critical:active, .btn-critical.active, .open .dropdown-toggle.btn-critical,
+.btn-high:hover, .btn-high:focus, .btn-high:active, .btn-high.active, .open .dropdown-toggle.btn-high,
+.btn-medium:hover, .btn-medium:focus, .btn-medium:active, .btn-medium:active, .open .dropdown-toggle.btn-medium
+ {
+	background-color: #3f3f44 !important;
+	color:#FFF;
+	border-color: #101013;
+}
+
+.h4-low {
+	background-color: #7eb46f; 
+	color:rgb(29, 92, 9);
+}
+
+.h4-medium {
+	background-color: #ecea45; 
+	color:rgb(139, 133, 37); 
+}
+
+.h4-high {
+	background-color: #d4a866; 
+	color:rgb(99, 69, 25);
+}
+
+.h4-critical {
+	background-color: #d47666; 
+	color:rgb(99, 48, 25); 
+}
+
+.h4-dangerous {
+	background-color: #df312b; 
+	color:rgb(240, 199, 196); 
+}
+
+.risk-details {
+    padding-left: 2px;
+}

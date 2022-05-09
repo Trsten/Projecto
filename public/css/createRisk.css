@@ -1,0 +1,19 @@
+.row {
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    padding: 15px;
+}
+.col {
+    float: left;
+    width: 50%
+}
+
+.form-inline .form-group {
+  margin-right:4px;
+  margin-bottom: 15px;
+}
+
+.invalid-feedback {
+    display: block;
+}

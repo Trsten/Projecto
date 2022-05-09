@@ -1,0 +1,63 @@
+<%- include("../layout/header", { title: create ? "Create user" : "Edit user" } ); -%>
+<div>
+	<h1><%= create ? "Create user" : "Edit user" %></h1>
+	<form method="post">
+		<div class="row mb-3">
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<%- include("../input.ejs", { name: "name", title: "Name", required: true }) %>
+			</div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<%- include("../input.ejs", { type: "email", name: "email", title: "Email", required: true }) %>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<%- include("../input.ejs", { type: "password", name: "password", title: "Password", required: create }) %>
+			</div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<%-
+					include("../input.ejs", { type: "select", name: "role", title: "Role", required: true, options:
+					[
+						["admin", "Admin"],
+						["project_manager", "Project manager"],
+						["risk_manager", "Risk manager"],
+						["user", "User"]
+					]})
+				%>
+			</div>
+		</div>
+		<div class="row mb-3<%= body.role === "user" ? "" : " d-none" %>" id="projectRow">
+			<div class="col-12 col-md-6">
+				<%-
+					include("../input.ejs", { type: "select", name: "projects", title: "Projects", required: false, options: projects, multiple: true })
+				%>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6 col-lg-4 col-xl-3 text-end">
+				<a href="/user/list" class="btn btn-outline-secondary">Cancel</a>
+			</div>
+			<div class="col">
+				<button type="submit" class="btn btn-primary"><%= create ? "Create" : "Save" %></button>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	(() =>
+	{
+		const toggleProjects = () =>
+		{
+			const projects = document.getElementById("projectRow");
+			const role = document.getElementById("role").value;
+
+			if (role === "user")
+				projects.classList.remove("d-none");
+			else
+				projects.classList.add("d-none");
+		};
+
+		document.getElementById("role").addEventListener("change", toggleProjects);
+	})();
+</script>
+<%- include("../layout/footer") %>

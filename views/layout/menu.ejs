@@ -1,0 +1,28 @@
+<div class="menu">
+	<div class="menu-heading">
+		<a href="/" class="text-decoration-none text-body">Projecto IS</a>
+	</div>
+	<div class="menu-user">
+		<div class="menu-avatar">
+			<div>
+				<%= user.name.split(" ").map(name => name[0]).join("") %>
+			</div>
+		</div>
+		<ul class="list-unstyled">
+			<li><%= user.name %></li>
+			<li>
+				<a href="/logout">Logout</a>
+			</li>
+		</ul>
+	</div>
+	<ul class="list-unstyled menu-links">
+		<li>
+			<a href="/project/list">Project list</a>
+		</li>
+		<% if (user.role === "admin") { %>
+			<li>
+				<a href="/user/list">User list</a>
+			</li>
+		<% } %>
+	</ul>
+</div>

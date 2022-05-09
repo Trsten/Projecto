@@ -1,0 +1,54 @@
+<%- include("../layout/header", { title: "Project list" }); -%>
+<h1>Risks graph of "<%= project.name %>"</h1>
+<% if (notFound) { %> 
+    <h1>Project not found</h1>
+<% } else if( risks.length > 0 ) { 
+
+    var arrRisksChart = new Array();
+
+    for ( var i = 0; i < risks.length; i++ ) {
+        arrRisksChart[i] = [ risks[i].name + ';' + risks[i].probability * risks[i].impact * 100];
+    }
+
+    %>
+    <script >
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = "<%= arrRisksChart %>";
+
+            var array = data.split(",");
+
+            var arrRisks = new Array();
+
+            for ( var i = 0; i < array.length; i++ ) {
+                var informations = array[i].split(';');
+                arrRisks[i] = [ informations[0], parseFloat(informations[1]) ];
+            }
+            
+            arrRisks.sort(function(a,b) {return a[1]-b[1] });
+            arrRisks = arrRisks.reverse();
+
+            arrRisks.unshift([" ", 'probability']);
+
+            var data = google.visualization.arrayToDataTable( arrRisks);
+
+            var options = {
+                legend: { position: 'none' },
+                bar: { groupWidth: "50%" },
+                axes: {
+                    y: {
+                        0: { side: 'right', label: 'value of risk [%]'}}
+            }
+        };
+          var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+          chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+      </script>
+
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+<% } else { %>
+    <br/><br/><span>There is no risks to show in graph</span>
+<% } %>
+<%- include("../layout/footer"); -%> 

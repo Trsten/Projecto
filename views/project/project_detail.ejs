@@ -1,0 +1,98 @@
+<%- include("../layout/header", { title: "Project list" }); -%>
+<% if (notFound) { %> 
+	<h1>Project not found</h1>
+<% } else { %>
+    
+    <h1>Project "<%= project.name %>"</h1>
+    <div class="row">
+        <div class="col">
+            <b>Projet manager:</b> <%= project.project_manager.name %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Risk manager:</b> <%= project.risk_manager ? project.risk_manager.name : "<No risk manager assigned>" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Created at:</b> <%= `${new Date(project.createdAt).getDate()}/${new Date(project.createdAt).getMonth() + 1}/${new Date(project.createdAt).getFullYear()}` %>
+        </div>
+    </div>
+    <div class="form-floating col-12 my-3">
+        <div class="form-floating input-group ">
+            <a href="<%="/project/risk_chart/" + project.id %>" class="btn btn-sm btn-outline-secondary d-block">Chart of Risks</a>
+            <a href="<%="/project/matrix/" + project.id %>" class="btn btn-sm btn-outline-secondary d-block">Matrix of Risks</a>
+            <% if (user.role !== "user") { %>
+            <a href="<%="/risk/new/" + project.id %>" class="btn btn-sm btn-outline-secondary d-block">New Risk</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <form class="project-search-form" method="GET" action=<%="/project/" + project.id %>>
+            <h3 class="mb-2">Search Risks</h3> 
+                <div class="d-flex">               
+                    <div class="form-floating mb-3 me-4" style="width: 50%" >
+                        <input type="text" class=" form-control" id="project-name" name="name" placeholder="Project name" value="<%= query.name %>"/>
+                        <label for="project-name">Risk name</label>
+                    </div>
+                    <div class="form-floating mb-3 me-4" style="width: 50%" >
+                        <input type="number" min="0" class=" form-control" id="risk-id" name="id" placeholder="Risk name" value="<%= query.id %>"/>
+                        <label for="risk-name">Risk id</label>
+                    </div>
+                    <div class="form-floating" style="width: 50%">
+                        <select id="sort-dir-select" class="form-select" name="category">
+                        <option value="" 
+                            ></option>
+                        <% categories.forEach(category => { %>
+                            <option value="<%=category.id%>" 
+                                <% if(query.category == category.id ) { %> <%= "selected" %> <% } %> ><%= category.name %>
+                            </option>
+                        <% }); %>
+                        </select>
+                        <label for="sort-dir-select" class="form-label">Category</label>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="form-group mb-3 me-4" style="width: 35%">
+                        <label  class="sr-only form-label"  for="identifiedAt">From</label>
+                        <input type="date" name="from" class="form-control" id="from" placeholder="YYYY-MM-DD" value="<%= query.from ? query.from : "" %>" />
+                    </div>
+                    <div class="form-group mb-3" style="width: 35%">
+                        <label  class="sr-only form-label"  for="identifiedAt">To</label>
+                        <input type="date" name="to" class="form-control" id="to" placeholder="YYYY-MM-DD" value="<%= query.to ? query.to : "" %>" />
+                    </div>
+                </div>
+
+                <div class="row  " >
+                    <div class="mb-3 d-flex">
+                        <div class="form-check me-2">
+                            <input id="created" class="form-check-input" type="radio" name="selected" value="createdAt"
+                            <% if(query.selected === "createdAt"  || query.selected == undefined ) { %> <%= "checked" %> <% } %> />
+                            <label for="created">Created at</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input id="respondet" class="form-check-input" type="radio" name="selected" value="respondedAt"
+                            <% if(query.selected === "respondedAt" ) { %> <%= "checked" %> <% } %> />
+                            <label for="respondet">Responded at</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input id="identified" class="form-check-input" type="radio" name="selected" value="identifiedAt"
+                            <% if(query.selected === "identifiedAt" ) { %> <%= "checked" %> <% } %> />
+                            <label for="identified">Identified at</label>
+                        </div>
+                    </div>
+                </div>
+               
+            <button type="submit" class="btn btn-primary">Search</button>
+
+        </form>
+
+    </div>
+
+<% } %>
+
+<%- include("../risk/riskList"); -%>
+
+<%- include("../layout/footer"); -%> 

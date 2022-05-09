@@ -1,0 +1,235 @@
+<%- include("../layout/header", { title: "Risk" }); -%>
+	<% if (risk.length === 1) { %>
+
+		<div class="project-list-header">
+			<h1>Risk "<%= risk[0].dataValues.name %>"</h1>
+			<div>
+				<% if (locals.role && (locals.role === "project_manager" || locals.role === "admin" || locals.role === "risk_manager" )) { %>
+					<a href="<%="/risk/edit/" + risk[0].dataValues.id %>" class="btn btn-sm btn-outline-secondary mx-auto d-block">Edit</a>
+				<% } %>
+			</div>
+		</div>
+		<div class="risk-details">
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						ID
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.id %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Category
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.category.name %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Project
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.project.name %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Owner
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.user.dataValues.name %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Status
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.status %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Threat
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.threat %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Starters
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.starters %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Response
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= risk[0].dataValues.response %>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Impact
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						impact of <%= risk[0].dataValues.impact*100  %>% at <%= risk[0].dataValues.probability*100  %>% probability
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Identified at
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= (
+							risk[0].dataValues.identifiedAt) ?
+							risk[0].dataValues.identifiedAt.toLocaleDateString() + " " + risk[0].dataValues.identifiedAt.toLocaleTimeString() :
+							"<date not entered>"
+						%>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Responded at
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= (
+								risk[0].dataValues.respondedAt) ?
+								risk[0].dataValues.respondedAt.toLocaleDateString() + " " + risk[0].dataValues.respondedAt.toLocaleTimeString() :
+								"<date not entered>"
+						%>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Status updated at
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= (
+								risk[0].dataValues.statusUpdatedAt) ?
+								risk[0].dataValues.statusUpdatedAt.toLocaleDateString() + " " + risk[0].dataValues.statusUpdatedAt.toLocaleTimeString() :
+								"<date not entered>"
+						%>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Created at
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= (
+								risk[0].dataValues.createdAt) ?
+								risk[0].dataValues.createdAt.toLocaleDateString() + " " + risk[0].dataValues.createdAt.toLocaleTimeString() :
+								"<date not entered>"
+						%>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3">
+					<p class="h5">
+						Updated at
+					</p>
+				</div>
+				<div class="col-9">
+					<p>
+						<%= (
+								risk[0].dataValues.updatedAt) ?
+								risk[0].dataValues.updatedAt.toLocaleDateString() + " " + risk[0].dataValues.updatedAt.toLocaleTimeString() :
+								"<date not entered>"
+						%>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="accordion" id="accordion">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="accordionHeader">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionContent" aria-expanded="true" aria-controls="accordionContent">
+						Description
+					</button>
+				</h2>
+			</div>
+			<div id="accordionContent" class="accordion-collapse collapse" aria-labelledby="accordionHeader" data-bs-parent="#accordion">
+				<div class="accordion-body">
+					<%= risk[0].dataValues.description %>
+				</div>
+			</div>
+		</div>
+
+	<% } else { %>
+		<p>  Error loading risk details</p>
+
+	<% } %>
+<%- include("../layout/footer"); -%>

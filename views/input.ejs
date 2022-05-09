@@ -1,0 +1,17 @@
+<label for="<%= locals.id || name %>" class="form-label"><%= title %></label>
+<div class="input-group<%= errors[name] ? " has-validation" : "" %>">
+    <% if (locals.type === "select") { %>
+        <select name="<%= locals.multiple ? name + "[]" : name %>" id="<%= locals.id || name %>" class="form-select<%= errors[name] ? " is-invalid" : "" %>"<%= locals.required ? " required" : "" %><%= locals.multiple ? " multiple" : "" %>>
+            <% options.forEach(([key, value]) => { %>
+                <option value="<%= key %>"<%= (locals.multiple ? (body[name] && body[name].includes(key)) : body[name] === key) ? " selected" : "" %>><%= value %></option>
+            <% }); %>
+        </select>
+    <% } else { %>
+        <input type="<%= locals.type || "text" %>" name="<%= name %>" id="<%= locals.id || name %>" value="<%= locals.type === "password" ? "" : body[name] %>" class="form-control<%= errors[name] ? " is-invalid" : "" %>"<%= locals.required ? " required" : "" %>>
+    <% } %>
+    <% if (errors[name]) { %>
+        <div class="invalid-feedback">
+            <%= errors[name].msg %>
+        </div>
+    <% } %>
+</div>

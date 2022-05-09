@@ -1,0 +1,67 @@
+<%- include("layout/header", { title: "New project" } ); -%>
+
+<div>
+	<h1>New project</h1>
+	<form method="post">
+		<div class="row">
+			<div class="col mb-3">
+				<div class="form-floating <%= locals.filtered && filtered.name ? "has-validation" : "" %>">
+					<input type="text" class="form-control <%= locals.filtered && filtered.name ? " is-invalid" : "" %>" id="name" name="name" aria-label="Project name" placeholder="New project" value="<%= locals.filtered && !filtered.name ? name : "" %>">
+					<label for="name" class="form-label">Project name</label>
+                    <% if (locals.filtered && filtered.name) { %>
+                        <div class="invalid-feedback">
+                            Please provide a name for new project.
+                        </div>
+                    <% } %>
+
+				</div>
+			</div>
+			<div class="col mb-3">
+				<div class="form-floating <%= locals.filtered && filtered.riskManagerId ? " has-validation" : "" %>">
+					<% if (riskManagers) { %>
+						<select class="form-select <%= locals.filtered && filtered.riskManagerId ? " is-invalid" : "" %>" id="riskManagerId" name="riskManagerId" aria-label="Risk manager">
+                            <option value="0">No risk manager</option>
+							<% riskManagers.forEach(function(user){ %>
+								<option value=<%= user.id %> <%= locals.filtered && !filtered.riskManagerId && riskManagerId === user.id ? "selected" : "" %>><%= user.name %></option>
+							<% }); %>
+						</select>
+                        <label for="riskManager" class="form-label">Risk manager</label>
+                        <% if (locals.filtered && filtered.riskManagerId === "Not risk manager") { %>
+                            <div class="invalid-feedback">
+                                Selected user is not a risk manager.
+                            </div>
+                        <% } %>
+                        <% if (locals.filtered && filtered.riskManagerId === "User does not exist") { %>
+                            <div class="invalid-feedback">
+                                Selected user does not exist.
+                            </div>
+                        <% } %>
+                    <% } %>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col">
+				<div class="form-floating <%= locals.filtered && filtered.description ? " has-validation" : "" %>">
+					<textarea style="height: 150px" class="form-control <%= locals.filtered && filtered.description ? " is-invalid" : "" %>" placeholder="Description" name="description" id="description"><%= locals.filtered && description ? description : "" %></textarea>
+					<label for="description" class="form-label">Description</label>
+                    <% if (locals.filtered && filtered.description) { %>
+                        <div class="invalid-feedback">
+                            Please provide a description for new project.
+                        </div>
+                    <% } %>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-6 col-lg-4 col-xl-3">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<%- include("layout/footer"); -%>

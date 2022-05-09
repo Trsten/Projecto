@@ -1,0 +1,140 @@
+<%- include("../layout/header", { title: "Risk list" }); -%>
+<link rel="stylesheet" href="css/createRisk.css">
+<div>
+   <h1><%= locals.edit ? "Edit" : "Create" %> Risk</h1>
+   <div>
+	  <form method="post" class="form-inline">
+<div class="row">
+	<div class="col">
+
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="name">Name</label>
+			<input required type="text" name="name" value="<%= body.name %>" class="form-control" id="name" placeholder="Name">
+			 <% if  (filtered.name) { %>
+				<div style="display:block;" class="invalid-feedback">
+					Please provide a name for risk.
+				</div>
+			 <% } %>
+		 </div>
+
+		  <div class="form-group mb-3">
+			 <label  class="sr-only form-label"  for="category">Category</label>
+			 <select required name="categoryId" id="Category" class="form-select">
+				<option hidden value="">Select one</option>
+			 <% categories.forEach(category=> {
+				 const { dataValues: { id, name }} = category
+				 %>
+
+				 <option value=<%= id %>  <%= body.categoryId == id ? " selected" : "" %>> <%= name %> </option>
+
+				 <% }); %>
+			 </select>
+		  </div>
+
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="Threat">Threat</label>
+			<input required type="text" name="threat" value="<%= body.threat %>" class="form-control" id="threat" placeholder="Threat">
+			 <% if  (filtered.threat) { %>
+				<div style="display:block;" class="invalid-feedback">
+					Please provide a threat definition for risk.
+				</div>
+			 <% } %>
+		 </div>
+
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="starters">Starters</label>
+			<input required type="text" name="starters" value="<%= body.starters %>" class="form-control" id="starters" placeholder="Starters">
+			 <% if  (filtered.starters) { %>
+				<div style="display:block;" class="invalid-feedback">
+					Please provide starters for risk.
+				</div>
+			 <% } %>
+		 </div>
+
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="Impact">Impact(%)</label>
+			<input required type="number" step="any" name="impact" value="<%= body.impact %>" class="form-control" id="impact" placeholder="Impact">
+			 <% if  (filtered.impact) { %>
+				<div style="display:block;" class="invalid-feedback">
+					Please provide impact for risk. Must be in range <0, 100>
+				</div>
+			 <% } %>
+		 </div>
+
+</div>
+	<div class="col">
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="Status">Status</label>
+			<select required name="status" id="Status" class="form-select">
+				<option hidden value="">Select one</option>
+				<option value="concept" <%= body.status === "concept" ? " selected" : "" %>>Concept</option>
+				<option value="active" <%= body.status === "active" ? " selected" : "" %>>Active</option>
+				<option value="closed" <%= body.status === "closed" ? " selected" : "" %>>Closed</option>
+				<option value="deleted" <%= body.status === "deleted" ? " selected" : "" %>>Deleted</option>
+				<option value="occurred" <%= body.status === "occurred" ? " selected" : "" %>>Occurred</option>
+			</select>
+		 </div>
+
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="Response">Response</label>
+			<input required type="text" name="response" value="<%= body.response %>" class="form-control" id="response" placeholder="Response">
+			 <% if  (filtered.response) { %>
+				<div style="display:block;" class="invalid-feedback">
+					Please provide response
+				</div>
+			 <% } %>
+		 </div>
+
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="Probability">Probability(%)</label>
+			<input required type="number" step="any" name="probability" value="<%= body.probability %>" class="form-control" id="probability" placeholder="Probability">
+			 <%
+			  if  (filtered.probability) { %>
+				<div style="display:block;" class="invalid-feedback">
+					Please provide probability for risk. Must be in range <0.0, 100.0>
+				</div>
+			 <% } %>
+		 </div>
+
+		 <div class="form-group mb-3">
+			<label  class="sr-only form-label"  for="identifiedAt">Identified at date</label>
+			<input type="datetime-local" name="identifiedAt" value="<%= body.identifiedAt ? (new Date(body.identifiedAt)).toISOString().substr(0, 19) : "" %>" class="form-control" id="identifiedAt" placeholder="YYYY-MM-DD">
+		 </div>
+
+		 <div class="form-group mb-3">
+			 <label  class="sr-only form-label"  for="identifiedAt">Responded at date</label>
+			 <input type="datetime-local" name="respondedAt" value="<%= body.respondedAt ? (new Date(body.respondedAt)).toISOString().substr(0, 19) : "" %>" class="form-control" id="respondedAt" placeholder="YYYY-MM-DD">
+		 </div>
+
+	</div>
+
+
+	<div class="form-group mb-3">
+		<label  class="sr-only form-label"  for="description">Description</label>
+		<textarea required name="description" class="form-control" id="description" rows="10" placeholder="Description"><%= body.description %></textarea>
+		<% if (filtered.description) { %>
+			<div style="display:block;" class="invalid-feedback">
+				Please provide a description for risk.
+			</div>
+		<% } %>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+			<div class="form-group text-end">
+				<a href="/project/<%= projectId %>" class="btn btn-outline-secondary submit-button">Cancel</a>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary submit-button"><%= locals.edit ? "Save" : "Create" %></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	  </form>
+   </div>
+</div>
+<%- include("../layout/footer"); -%>
+
